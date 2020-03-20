@@ -1,17 +1,27 @@
-name: Build and Deploy
-on: [push]
+name: Deploy GitHub Pages
+
+# 触发条件：在 push 到 master 分支后
+on:
+  push:
+    branches:
+      - master
+
+# 任务
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
-    - name: Build and Deploy
-      uses: grasilife/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: master # The branch the action should deploy from.
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: build # The folder the action should deploy.
-        BUILD_SCRIPT: npm install && npm run-script build # The build script the action should run prior to deploying.
+      - name: Build
+        run: npm install && npm run build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs/.vuepress/dist
