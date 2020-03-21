@@ -1,18 +1,19 @@
 {
-  "name": "vuepress-test",
+  "name": "vuepress-work",
   "version": "1.0.0",
   "description": "my vuepress",
   "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "vuepress"
   ],
   "author": "y.he",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.4.0",
     "vuepress": "^1.4.0"
   }
 }
