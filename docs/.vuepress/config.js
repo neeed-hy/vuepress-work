@@ -5,6 +5,9 @@ module.exports = {
   title: '倪一德的学习小站',
   description: '一个用来记录个人学习和工作经验的小站',
   plugins: ['@vuepress/back-to-top'],
+  markdown: {
+    lineNumbers: true
+  },
   themeConfig: {
     nav: [
       { text: '前端知识', link: '/frontend/' },
