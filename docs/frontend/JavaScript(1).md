@@ -205,7 +205,7 @@ JS类型转换只有三种情况：
 - 转字符串
 
 具体的转换规则如下：
-(这个地方应该放个图，待我研究一下)
+![转换规则图片](https://user-gold-cdn.xitu.io/2019/10/20/16de9512eaf1158a?imageView2/0/w/1280/h/960/format/png/ignore-error/1)
 
 ### `==`和`===`的区别
 
