@@ -12,7 +12,9 @@
 - css
 - 原生JS
   - [数据类型](JavaScript(1).md)
-  - [重要概念](JavaScript(2).md)
+  - [作用域与闭包](JavaScript(2).md)
+  - [原型链、面向对象与函数式编程](JavaScript(3).md)
+  - [其他重要概念](JavaScript(4).md)
   - ES6
 - 浏览器
 - 计算机网络
