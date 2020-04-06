@@ -15,6 +15,8 @@
   - [作用域与闭包](JavaScript(2).md)
   - [原型链、面向对象与函数式编程](JavaScript(3).md)
   - [其他重要概念](JavaScript(4).md)
+  - [Event Loop](JavaScript(5).md)
+  - [异步编程](JavaScript(6).md)
   - ES6
 - 浏览器
 - 计算机网络
