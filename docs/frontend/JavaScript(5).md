@@ -4,6 +4,8 @@
 
 ## 浏览器篇
 
+### 事件执行机制
+
 JavaScript是一门**单线程**语言。因此JS任务是一个一个顺序执行的。一个任务耗时过长，排在他后面的任务也必须等待。
 
 单线程的语言存在一些执行性能上的问题。例如，网页上有高清图片，那么在高清图片下载完之前网页不会显示。为了解决这个问题，JS将执行任务从大类上分成两大类：
@@ -258,12 +260,49 @@ setTimeout(function() {
   - 依次执行微任务队列，输出10,12;
 - 最终输出1，7，6，8，2，4，3，5，9，11，10，12
 
+### async/await
+
+async/await实际上是Promise的语法糖，因此在遇到的时候，把它转化成Promise来处理。下面这段代码是async/await的经典形式：
+
+```js
+async function foo() {
+    //  await 之前的代码
+    await bar();
+    //  await 之后的代码
+}
+
+async function bar() {
+    //  do something
+}
+
+foo();
+```
+
+其中，**await前面的代码是同步的**，`await bar()`这句话可以转换成`Promise.resolve(bar())`**;await之后的之后的代码会被放到`Promise.then()`方法中去**。因此，上面的代码会转换成如下形式：
+
+```js
+function foo() {
+    //  await 之前的代码
+    Promise.resolve(bar()).then(()=> {
+        //  await 之后的代码
+    })
+}
+
+function bar() {
+    //  do something
+}
+
+foo();
+```
+
+更具体的题目可以参见[这里](../interview/Event%20Loop.md)的题1。
+
 ## node.js篇
 
 ## 参考出处
 
-1. [ssssyoki掘金文章-彻底弄懂 JavaScript 执行机制](https://juejin.im/post/59e85eebf265da430d571f89)
-2. [蚂蚁金服的掘金文章-Event Loop的规范和实现](https://juejin.im/post/5a6155126fb9a01cb64edb45)
-3. [YanceyOfficial的掘金文章-最后一次搞懂 Event Loop](https://juejin.im/post/5cbc0a9cf265da03b11f3505)
-4. [掘金yck小册](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5be04a8e6fb9a04a072fd2cd)
-5. [神三元掘金文章-原生JS(下篇)](https://juejin.im/post/5dd8b3a851882572f56b578f#heading-0)
+1. [掘金yck小册](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5be04a8e6fb9a04a072fd2cd)
+2. [神三元掘金文章-原生JS(下篇)](https://juejin.im/post/5dd8b3a851882572f56b578f#heading-0)
+3. [ssssyoki掘金文章-彻底弄懂 JavaScript 执行机制](https://juejin.im/post/59e85eebf265da430d571f89)
+4. [蚂蚁金服的掘金文章-Event Loop的规范和实现](https://juejin.im/post/5a6155126fb9a01cb64edb45)
+5. [YanceyOfficial的掘金文章-最后一次搞懂 Event Loop](https://juejin.im/post/5cbc0a9cf265da03b11f3505)

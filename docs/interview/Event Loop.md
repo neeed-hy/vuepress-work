@@ -4,7 +4,7 @@
 
 ### 题1
 
-来自[YanceyOfficial][YanceyOfficial]
+来自[YanceyOfficial]
 
 ```js
 async function async1() {
@@ -28,6 +28,14 @@ new Promise(function(resolve) {
 });
 console.log('script end');
 ```
+
+#### 提示
+
+async/await 实际上是Promise 的语法糖。在遇到时可以将它转换成Promise 来处理。
+
+答案：
+
+依次输出script start; async1 start; async2; promise1; script end; async1 end; promise2; setTimeout
 
 ## 题目总结
 
