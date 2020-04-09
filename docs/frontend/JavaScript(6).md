@@ -240,15 +240,71 @@ Promise 最基本的使用方法如下：
 
 ## async/await
 
+async/await 被称为 JS 中**异步终极解决方案**。在async 函数中使用await，那么await 这里的代码就会变成同步的，只有等**await 后面的Promise 执行完毕后**才会继续下去。
+
+详细内容请参考[阮一峰的async部分]内容，这里只记录大纲以及重要性结论。
+
+### 基本概念
+
+#### async
+
+- **async 函数返回一个 Promise 对象**，可以使用then方法添加回调函数。
+- async函数内部抛出错误，会导致**返回的Promise 对象变为rejected 状态**。抛出的错误会被`catch`方法捕捉到。
+- 一般来说，async 函数都需要返回
+
+#### await
+
+- 在**async函数内部可以使用await命令**，表示等待一个异步函数的返回。**await不能够单独使用**。
+- 正常情况下，**await 命令后面是一个Promise 对象，返回该对象的结果**。await 后面的Promise 对象不必写`then`,因为await 可以**直接获取后面Promise 对象的resolved 状态**传递出来的参数。
+- 如果await 命令后面不是Promise 对象，就直接返回对应的值；如果await 命令后面是一个thenable 对象，await会将其等同于Promise 对象。
+
+### 错误处理
+
+- 如果await 后面的异步操作出错，那么等同于async 函数返回的Promise 对象被reject，可以被该对象的`catch`方法捕捉，reject 的参数会传入`catch`方法。
+- 如果一个async 函数中有多个await 语句，任何一个await 语句后面的Promise 对象变为reject 状态，整个async 函数都会中断执行。
+- 基于以上，可以**将await 语句放在`try...catch`结构里面**，这样不会耽误后面的代码执行；或者在await 后面的Promise 对象再跟一个`catch` 方法，处理错误。
+
+### 使用注意点
+
+- 最好把await 命令放在`try...catch`代码块中。
+- 多个await 命令后面的异步操作，如果**不存在继发关系，最好让他们同时触发**。同时触发有两种写法：
+  - 使用`Promise.all()`
+  - 见代码：
+  
+  ```js
+  // 写法一
+  let [foo, bar] = await Promise.all([getFoo(), getBar()]);
+
+  // 写法二
+  let fooPromise = getFoo();
+  let barPromise = getBar();
+  let foo = await fooPromise;
+  let bar = await barPromise;
+  ```
+
+- async 函数可以保留运行堆栈.
+
+### await与循环
+
+- 对于异步代码，**forEach 并不能保证按顺序执行**。
+- 想要在循环中使用await ，需要**使用`for... of` 语句**。
+
+解决原理——Iterator
+
 ## 参考出处
 
 1. [阮一峰ES6教程-Promise][阮一峰]
-2. [掘金yck小册](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5bdc7198518825171726cfce)
-3. [神三元掘金文章-原生JS(下篇)](https://juejin.im/post/5dd8b3a851882572f56b578f#heading-30)
-4. [写代码像蔡徐抻的掘金文章-异步编程二三事](https://juejin.im/post/5e3b9ae26fb9a07ca714a5cc)
-5. [蔓蔓雒轩的掘金文章-通俗易懂的Promise](https://juejin.im/post/5afe6d3bf265da0b9e654c4b)
-6. [艾特老干部的掘金文章-八段代码彻底掌握Promise](https://juejin.im/post/597724c26fb9a06bb75260e8)
-7. [lucefer的掘金文章-面试精选之Promise](https://juejin.im/post/5b31a4b7f265da595725f322)
-8. [石墨文档的掘金文章-Promise 必知必会](https://juejin.im/post/5a04066351882517c416715d)
+2. [阮一峰ES6教程-async][阮一峰的async部分]
+3. [掘金yck小册](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5bdc7198518825171726cfce)
+4. [神三元掘金文章-原生JS(下篇)](https://juejin.im/post/5dd8b3a851882572f56b578f#heading-30)
+5. [写代码像蔡徐抻的掘金文章-异步编程二三事](https://juejin.im/post/5e3b9ae26fb9a07ca714a5cc)
+6. [蔓蔓雒轩的掘金文章-通俗易懂的Promise](https://juejin.im/post/5afe6d3bf265da0b9e654c4b)
+7. [艾特老干部的掘金文章-八段代码彻底掌握Promise](https://juejin.im/post/597724c26fb9a06bb75260e8)
+8. [lucefer的掘金文章-面试精选之Promise](https://juejin.im/post/5b31a4b7f265da595725f322)
+9. [石墨文档的掘金文章-Promise 必知必会](https://juejin.im/post/5a04066351882517c416715d)
+10. [陈惠超的掘金文章-理解 async/await](https://juejin.im/post/596e142d5188254b532ce2da)
+11. [大Y的掘金文章-一次性让你懂async/await](https://juejin.im/post/5b1ffff96fb9a01e345ba704)
+12. [limingru的掘金文章-与Promise血脉相连的async/await](https://juejin.im/post/5a9516885188257a6b061d72)
 
 [阮一峰]:https://es6.ruanyifeng.com/#docs/promise
+[阮一峰的async部分]:https://es6.ruanyifeng.com/#docs/async

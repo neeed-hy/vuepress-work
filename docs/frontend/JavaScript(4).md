@@ -119,6 +119,8 @@ console.log(obj.b.c)                // 2
 
 ## this
 
+## 迭代器Iterator
+
 ## 参考出处
 
 1. [掘金yck小册](https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5bdc715f6fb9a049c15ea4e0)
