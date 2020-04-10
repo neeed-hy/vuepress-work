@@ -238,6 +238,14 @@ Promise 最基本的使用方法如下：
 
 以上就是Promise 最基本的使用方法。
 
+## Generator/co
+
+Generator 生成器函数，在async/await 出现之前可以用来做异步解决方案。一般来说需要配合co 这个第三方库来使用。
+
+现在一般已经不使用Generator/co 进行异步编程。推荐使用async/await 方案。
+
+Generator 的本质用途是用来实现Iterator 迭代器的，用在异步上是他的一个特殊用途。Generator 的详解可以参考[这里](JavaScript(4).md)。
+
 ## async/await
 
 async/await 被称为 JS 中**异步终极解决方案**。在async 函数中使用await，那么await 这里的代码就会变成同步的，只有等**await 后面的Promise 执行完毕后**才会继续下去。
