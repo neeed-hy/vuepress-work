@@ -9,20 +9,19 @@
 前端知识的主要体系由以下知识构成：
 
 - html
-  - [语义化](HTML1.md)
 - css
   - [flex 布局](CSS1.md)
+  - [grid 布局](CSS2.md)
 - 原生 JS
   - [数据类型与数据结构](JS1.md)
   - [作用域与闭包](JS2.md)
-  - [原型链、面向对象与函数式编程](JS3.md)
+  - [原型、面向对象、new](JS3.md)
   - [深入数组](JS4.md)
-  - [遍历器与生成器](JS5.md)
-  - [this、new、拷贝](JS6.md)
+  - [遍历器、生成器、拷贝](JS5.md)
+  - [this](JS6.md)
   - [Event Loop](JS7.md)
   - [异步编程](JS8.md)
   - [Promise 专题](JS9.md)
-  - ES6
 - TypeScript
 - 浏览器
   - [浏览器存储](浏览器1.md)
